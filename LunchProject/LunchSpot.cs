@@ -13,7 +13,7 @@ public class LunchSpot
     public string Name { get; set; }
 
     [Required]
-    [RegularExpression(@"^\$|\$\$|\$\$\$$", ErrorMessage = "Price range must be $, $$, or $$$")]
+    [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]
     public string PriceRange { get; set; }
 
     [Required]
