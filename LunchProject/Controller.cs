@@ -7,7 +7,7 @@ namespace LunchProject;
 [Route("spots")]
 public class Controller : ControllerBase
 {
-    private static readonly string FilePath = "lunchspots.json";
+    private static readonly string FilePath = "lunchSpotsDatabase.json";
     public static List<LunchSpot> LunchSpots = LoadFromFile();
 
     [HttpPost]
