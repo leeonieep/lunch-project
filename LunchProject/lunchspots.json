@@ -1,0 +1,22 @@
+[
+  {
+    "Id": "f0d12dbc-c117-4dda-9737-81ff71663fc2",
+    "Name": "Boots",
+    "PriceRange": "$",
+    "AveragePortionSize": "small",
+    "MinutesWalkAway": 5,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Id": "83aa77e7-dd08-4d1c-89ab-5e8f6bc375fc",
+    "Name": "hello",
+    "PriceRange": "$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 6,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  }
+]
