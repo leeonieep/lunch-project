@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using LunchProject;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<AddLunchSpotService>(); //add interface 
 
 var app = builder.Build();
 

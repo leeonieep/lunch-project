@@ -11,7 +11,7 @@ public class ControllerTests
 
 
     [Fact]
-    public void Test1()
+    public void AddLunchSpot_Should()
     {
         
       var result = _subjectUnderTest.AddLunchSpot(new LunchSpot
@@ -25,6 +25,6 @@ public class ControllerTests
             SuitableForJanet = true
         });
       
-        result.Should().BeOfType<CreatedAtActionResult>();
+        result.ShouldBeOfType<CreatedAtActionResult>();
     }
 }
