@@ -1,13 +1,12 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace LunchProject;
 
 public class LunchSpot
 {
-    public string Id { get; set; }
+    [JsonIgnore]
+    public string? Id { get; set; }
 
     [Required]
     public string Name { get; set; }
