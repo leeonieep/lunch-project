@@ -20,7 +20,7 @@ public class LunchSpot
     public string AveragePortionSize { get; set; }
 
     [Required]
-    [Range(0, int.MaxValue, ErrorMessage = "Minutes walk away must be a positive number")]
+    [Range(0, 30, ErrorMessage = "Minutes walk away must be between 0 and 30")]
     public int MinutesWalkAway { get; set; }
 
     [Required]
