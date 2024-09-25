@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace LunchProject;
 
-public class AddLunchSpotService
+public class AddLunchSpotService : IAddLunchSpotService
 {
     private const string FilePath = "lunchSpotsDatabase.json";
     private static readonly JsonSerializerOptions JsonOptions = new()

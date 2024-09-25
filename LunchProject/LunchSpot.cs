@@ -6,7 +6,7 @@ namespace LunchProject;
 public class LunchSpot
 {
     [JsonIgnore]
-    public string? Id { get; set; }
+    public string? Id { get; set; } //TODO fix this
 
     [Required]
     public string Name { get; set; }

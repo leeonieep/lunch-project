@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<AddLunchSpotService>(); //add interface 
+builder.Services.AddScoped<IAddLunchSpotService, AddLunchSpotService>();
 
 var app = builder.Build();
 

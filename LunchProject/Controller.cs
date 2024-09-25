@@ -4,10 +4,8 @@ namespace LunchProject;
 
 [ApiController]
 [Route("spots")]
-public class Controller : ControllerBase
+public class Controller(IAddLunchSpotService lunchSpotService) : ControllerBase
 {
-    private readonly AddLunchSpotService _lunchSpotService = new();
-
     [HttpPost]
     public IActionResult AddLunchSpot([FromBody] LunchSpot spot)
     {
@@ -16,7 +14,7 @@ public class Controller : ControllerBase
             return BadRequest(ModelState);
         }
 
-        _lunchSpotService.AddLunchSpot(spot);
+        lunchSpotService.AddLunchSpot(spot);
 
         return CreatedAtAction(nameof(AddLunchSpot), new { id = spot.Id }, spot);
     }
