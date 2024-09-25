@@ -23,9 +23,9 @@ public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpot
     }
 
     [HttpPost("find")]
-    public IActionResult FindLunchSpots([FromBody] RequestLunchSpot request)
+    public async Task<IActionResult>  FindLunchSpots([FromBody] RequestLunchSpot request)
     {
-        var matchingSpots = findLunchSpotService.FindLunchSpot(request);
+        var matchingSpots = await findLunchSpotService.FindLunchSpot(request);
 
         if (matchingSpots.Count <= 0)
         {

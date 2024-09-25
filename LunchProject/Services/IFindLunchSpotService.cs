@@ -4,5 +4,5 @@ namespace LunchProject.Services;
 
 public interface IFindLunchSpotService
 {
-    List<LunchSpot> FindLunchSpot(RequestLunchSpot request);
+    Task<List<LunchSpot>> FindLunchSpot(RequestLunchSpot request);
 }
