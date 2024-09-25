@@ -1,4 +1,6 @@
-namespace LunchProject;
+using LunchProject.Models;
+
+namespace LunchProject.Services;
 
 public interface IAddLunchSpotService
 {

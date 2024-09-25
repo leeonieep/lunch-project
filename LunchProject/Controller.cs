@@ -1,10 +1,13 @@
+using LunchProject.Models;
+using LunchProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LunchProject;
 
 [ApiController]
 [Route("spots")]
-public class Controller(IAddLunchSpotService lunchSpotService) : ControllerBase
+public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpotService findLunchSpotService)
+    : ControllerBase
 {
     [HttpPost]
     public IActionResult AddLunchSpot([FromBody] LunchSpot spot)
@@ -14,8 +17,21 @@ public class Controller(IAddLunchSpotService lunchSpotService) : ControllerBase
             return BadRequest(ModelState);
         }
 
-        lunchSpotService.AddLunchSpot(spot);
+        addLunchSpotService.AddLunchSpot(spot);
 
         return CreatedAtAction(nameof(AddLunchSpot), new { id = spot.Id }, spot);
+    }
+
+    [HttpPost("find")]
+    public IActionResult FindLunchSpots([FromBody] RequestLunchSpot request)
+    {
+        var matchingSpots = findLunchSpotService.FindLunchSpot(request);
+
+        if (matchingSpots.Count <= 0)
+        {
+            return NotFound("No lunch spots match the provided criteria.");
+        }
+
+        return Ok(matchingSpots);
     }
 }

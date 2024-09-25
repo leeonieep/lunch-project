@@ -1,6 +1,5 @@
 [
   {
-    "Id": "f0d12dbc-c117-4dda-9737-81ff71663fc2",
     "Name": "Boots",
     "PriceRange": "$",
     "AveragePortionSize": "small",
@@ -10,11 +9,37 @@
     "SuitableForJanet": true
   },
   {
-    "Id": "83aa77e7-dd08-4d1c-89ab-5e8f6bc375fc",
     "Name": "hello",
     "PriceRange": "$",
     "AveragePortionSize": "medium",
     "MinutesWalkAway": 6,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "hi",
+    "PriceRange": "$",
+    "AveragePortionSize": "large",
+    "MinutesWalkAway": 56,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "string",
+    "PriceRange": "$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 30,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "new spot",
+    "PriceRange": "$$$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 30,
     "SuitableForLeonie": true,
     "SuitableForSahir": true,
     "SuitableForJanet": true

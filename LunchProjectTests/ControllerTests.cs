@@ -1,4 +1,6 @@
 using LunchProject;
+using LunchProject.Models;
+using LunchProject.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Shouldly;
@@ -9,12 +11,14 @@ namespace LunchProjectTests;
 public class ControllerTests
 {
     private readonly Mock<IAddLunchSpotService> _lunchSpotServiceMock;
+    private readonly Mock<IFindLunchSpotService> _searchLunchSpotServiceMock;
     private readonly Controller _subjectUnderTest;
     
     public ControllerTests()
     {
         _lunchSpotServiceMock = new Mock<IAddLunchSpotService>();
-        _subjectUnderTest = new Controller(_lunchSpotServiceMock.Object);
+        _searchLunchSpotServiceMock = new Mock<IFindLunchSpotService>();
+        _subjectUnderTest = new Controller(_lunchSpotServiceMock.Object, _searchLunchSpotServiceMock.Object);
     }
 
     [Fact]
