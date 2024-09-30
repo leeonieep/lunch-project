@@ -4,6 +4,8 @@ namespace LunchProject.Models;
 
 public class RequestLunchSpot
 {
+    public string? Name { get; set; }
+    
     [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]
     public string? PriceRange { get; set; }
     
@@ -12,10 +14,10 @@ public class RequestLunchSpot
     
     [Range(0, 30, ErrorMessage = "Minutes walk away must be between 0 and 30")]
     public int? MinutesWalkAway { get; set; }
-    
-    public bool? SuitableForLeonie { get; set; }
-    
-    public bool? SuitableForSahir { get; set; }
-    
-    public bool? SuitableForJanet { get; set; }
+
+    public bool? SuitableForLeonie { get; set; } = false;
+
+    public bool? SuitableForSahir { get; set; } = false;
+
+    public bool? SuitableForJanet { get; set; } = false;
 }
