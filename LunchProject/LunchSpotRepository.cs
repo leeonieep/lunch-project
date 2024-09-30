@@ -3,7 +3,7 @@ using LunchProject.Models;
 
 namespace LunchProject;
 
-public static class DatabaseHelper
+public class LunchSpotRepository : ILunchSpotRepository
 {
     private const string FilePath = "lunchSpotsDatabase.json";
     
@@ -12,7 +12,7 @@ public static class DatabaseHelper
         WriteIndented = true
     };
 
-    public static async Task<List<LunchSpot>> LoadFromFile()
+    public async Task<List<LunchSpot>> LoadFromFile()
     {
         if (!File.Exists(FilePath))
         {
@@ -23,7 +23,7 @@ public static class DatabaseHelper
         return JsonSerializer.Deserialize<List<LunchSpot>>(jsonString) ?? new List<LunchSpot>();
     }
 
-    public static async void SaveToFile(List<LunchSpot> spots)
+    public async void SaveToFile(List<LunchSpot> spots)
     {
         var jsonString = JsonSerializer.Serialize(spots, JsonOptions);
         await File.WriteAllTextAsync(FilePath, jsonString);

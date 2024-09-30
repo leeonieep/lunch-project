@@ -2,11 +2,11 @@ using LunchProject.Models;
 
 namespace LunchProject.Services;
 
-public class FindLunchSpotService : IFindLunchSpotService
+public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchSpotService
 {
     public async Task<List<LunchSpot>> FindLunchSpot(RequestLunchSpot request)
     {
-        var allLunchSpots = await DatabaseHelper.LoadFromFile();
+        var allLunchSpots = await repository.LoadFromFile();
 
         var matchingSpots = allLunchSpots.Where(spot =>
             spot.PriceRange == request.PriceRange ||
