@@ -12,6 +12,7 @@ public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpo
         
         spots.Add(spot);
         
+        //try catch?
         repository.SaveToFile(spots);
     }
 }
