@@ -5,11 +5,8 @@ namespace LunchProject.Models;
 
 public class LunchSpot
 {
-    [JsonIgnore]
-    public string? Id { get; set; } //TODO fix this
-
     [Required]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [Required]
     [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]

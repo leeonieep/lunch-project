@@ -8,8 +8,6 @@ public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpo
     {
         var spots = await repository.LoadFromFile();
         
-        spot.Id = Guid.NewGuid().ToString();
-        
         spots.Add(spot);
         
         //try catch?

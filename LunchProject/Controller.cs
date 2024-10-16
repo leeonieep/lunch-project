@@ -19,7 +19,7 @@ public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpot
 
         addLunchSpotService.AddLunchSpot(spot);
 
-        return CreatedAtAction(nameof(AddLunchSpot), new { id = spot.Id }, spot);
+        return CreatedAtAction(nameof(AddLunchSpot), new { name = spot.Name }, spot);
     }
 
     [HttpPost("find")]

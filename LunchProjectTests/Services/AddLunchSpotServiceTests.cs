@@ -37,8 +37,6 @@ public class AddLunchSpotServiceTests
         _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Once);
         
         spots.Count.ShouldBe(1);
-        spots[0].Id.ShouldNotBeNull();
-        spots[0].Id.ShouldBeEquivalentTo(request.Id); 
         spots[0].Name.ShouldBeEquivalentTo(request.Name);
         spots[0].MinutesWalkAway.ShouldBeEquivalentTo(request.MinutesWalkAway);
         spots[0].PriceRange.ShouldBeEquivalentTo(request.PriceRange);
