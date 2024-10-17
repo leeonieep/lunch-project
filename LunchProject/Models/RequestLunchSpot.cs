@@ -4,7 +4,7 @@ namespace LunchProject.Models;
 
 public class RequestLunchSpot
 {
-    public string? Name { get; set; }
+    public string? Name { get; set; }  //TODO needed?
     
     [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]
     public string? PriceRange { get; set; }
