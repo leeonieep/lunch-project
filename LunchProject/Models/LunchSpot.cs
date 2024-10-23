@@ -10,11 +10,11 @@ public class LunchSpot
 
     [Required]
     [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]
-    public string PriceRange { get; set; }
+    public string? PriceRange { get; set; }
 
     [Required]
     [RegularExpression(@"small|medium|large", ErrorMessage = "Portion size must be 'small', 'medium', or 'large'")]
-    public string AveragePortionSize { get; set; }
+    public string? AveragePortionSize { get; set; }
 
     [Required]
     [Range(0, 30, ErrorMessage = "Minutes walk away must be between 0 and 30")]

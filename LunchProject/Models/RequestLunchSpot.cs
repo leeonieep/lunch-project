@@ -4,12 +4,10 @@ namespace LunchProject.Models;
 
 public class RequestLunchSpot
 {
-    public string? Name { get; set; }  //TODO needed?
-    
     [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]
     public string? PriceRange { get; set; }
     
-    [RegularExpression(@"small|medium|large", ErrorMessage = "Portion size must be 'small', 'medium', or 'large'")]
+    [RegularExpression("small|medium|large", ErrorMessage = "Portion size must be 'small', 'medium', or 'large'")]
     public string? AveragePortionSize { get; set; }
     
     [Range(0, 30, ErrorMessage = "Minutes walk away must be between 0 and 30")]
