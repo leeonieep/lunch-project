@@ -1,5 +1,6 @@
 ﻿using LunchProject.Repositories;
 using LunchProject.Services;
+using LunchProject.Services.Interfaces;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

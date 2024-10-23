@@ -1,6 +1,6 @@
 using LunchProject.Models;
 
-namespace LunchProject.Services;
+namespace LunchProject.Services.Interfaces;
 
 public interface IAddLunchSpotService
 {
