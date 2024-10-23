@@ -1,11 +1,11 @@
 using System.Text.Json;
 using LunchProject.Models;
 
-namespace LunchProject;
+namespace LunchProject.Repositories;
 
 public class LunchSpotRepository : ILunchSpotRepository
 {
-    private const string FilePath = "lunchSpotsDatabase.json";
+    private const string FilePath = "Repositories/lunchSpotsDatabase.json";
     
     private static readonly JsonSerializerOptions JsonOptions = new()
     {

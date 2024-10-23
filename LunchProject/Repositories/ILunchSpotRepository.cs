@@ -1,6 +1,6 @@
 using LunchProject.Models;
 
-namespace LunchProject;
+namespace LunchProject.Repositories;
 
 public interface ILunchSpotRepository
 {

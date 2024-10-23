@@ -4,7 +4,7 @@
     "PriceRange": "$",
     "AveragePortionSize": "small",
     "MinutesWalkAway": 5,
-    "SuitableForLeonie": true,
+    "SuitableForLeonie": false,
     "SuitableForSahir": true,
     "SuitableForJanet": true
   },
@@ -37,6 +37,15 @@
   },
   {
     "Name": "new spot",
+    "PriceRange": "$$$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 30,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "woooo",
     "PriceRange": "$$$",
     "AveragePortionSize": "medium",
     "MinutesWalkAway": 30,
