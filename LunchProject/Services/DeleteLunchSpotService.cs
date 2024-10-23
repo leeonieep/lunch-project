@@ -4,8 +4,12 @@ namespace LunchProject.Services;
 
 public class DeleteLunchSpotService(ILunchSpotRepository repository) : IDeleteLunchSpotService
 {
-   public async Task DeleteLunchSpot()
+   public async Task<bool> DeleteLunchSpot()
    {
+      var existingSpots = await repository.LoadFromFile();
       
+      // match spot name ? delete : return false
+
+      return true;
    }
 }
