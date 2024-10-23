@@ -18,7 +18,6 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
             {
                 if (spot.PriceRange != request.PriceRange)
                 {
-                    match = false;
                     continue; 
                 }
             }
@@ -27,7 +26,6 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
             {
                 if (spot.AveragePortionSize != request.AveragePortionSize)
                 {
-                    match = false;
                     continue;
                 }
             }
@@ -36,7 +34,6 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
             {
                 if (spot.MinutesWalkAway > request.MinutesWalkAway)
                 {
-                    match = false;
                     continue;
                 }
             }
@@ -45,7 +42,6 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
             {
                 if (spot.SuitableForLeonie != request.SuitableForLeonie)
                 {
-                    match = false;
                     continue;
                 }
             }
@@ -54,7 +50,6 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
             {
                 if (spot.SuitableForSahir != request.SuitableForSahir)
                 {
-                    match = false;
                     continue;
                 }
             }
@@ -63,7 +58,6 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
             {
                 if (spot.SuitableForJanet != request.SuitableForJanet)
                 {
-                    match = false;
                     continue;
                 }
             }
