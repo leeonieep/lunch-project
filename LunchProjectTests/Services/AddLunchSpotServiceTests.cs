@@ -18,7 +18,7 @@ public class AddLunchSpotServiceTests
     }
     
     [Fact]
-    public void AddLunchSpot_ShouldAddSpotToRepository()
+    public async Task AddLunchSpot_ShouldAddSpotToRepository()
     {
         var request = new LunchSpot
         {
@@ -31,7 +31,32 @@ public class AddLunchSpotServiceTests
         
         _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(spots);
         
-        _subjectUnderTest.AddLunchSpot(request);
+        await _subjectUnderTest.AddLunchSpot(request);
+        
+        _lunchSpotRepositoryMock.Verify(x => x.LoadFromFile(), Times.Once);
+        _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Once);
+        
+        spots.Count.ShouldBe(1);
+        spots[0].Name.ShouldBeEquivalentTo(request.Name);
+        spots[0].MinutesWalkAway.ShouldBeEquivalentTo(request.MinutesWalkAway);
+        spots[0].PriceRange.ShouldBeEquivalentTo(request.PriceRange);
+    }
+    
+    [Fact]
+    public async Task AddLunchSpot_ShouldNotAddASpotThatAlreadyExists()
+    {
+        var request = new LunchSpot
+        {
+            Name = "test spot", 
+            MinutesWalkAway = 5, 
+            PriceRange = "$"
+        };
+        
+        var spots = new List<LunchSpot>();
+        
+        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(spots);
+        
+        await _subjectUnderTest.AddLunchSpot(request);
         
         _lunchSpotRepositoryMock.Verify(x => x.LoadFromFile(), Times.Once);
         _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Once);

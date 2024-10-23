@@ -10,20 +10,25 @@ public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpot
     : ControllerBase
 {
     [HttpPost]
-    public IActionResult AddLunchSpot([FromBody] LunchSpot spot)
+    public async Task<ObjectResult> AddLunchSpot([FromBody] LunchSpot spot)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-
-        addLunchSpotService.AddLunchSpot(spot);
+        
+        var success = await addLunchSpotService.AddLunchSpot(spot);
+        
+        if (!success)
+        {
+            return Conflict($"A lunch spot with the name '{spot.Name}' already exists.");
+        }
 
         return CreatedAtAction(nameof(AddLunchSpot), new { name = spot.Name }, spot);
     }
 
     [HttpPost("find")]
-    public async Task<IActionResult>  FindLunchSpots([FromBody] RequestLunchSpot request)
+    public async Task<ObjectResult>  FindLunchSpots([FromBody] RequestLunchSpot request)
     {
         var matchingSpots = await findLunchSpotService.FindLunchSpot(request);
 

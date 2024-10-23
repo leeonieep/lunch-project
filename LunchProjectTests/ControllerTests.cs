@@ -1,4 +1,3 @@
-using LunchProject;
 using LunchProject.Models;
 using LunchProject.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,31 +9,44 @@ namespace LunchProjectTests;
 
 public class ControllerTests
 {
-    private readonly Mock<IAddLunchSpotService> _lunchSpotServiceMock;
-    private readonly Mock<IFindLunchSpotService> _searchLunchSpotServiceMock;
+    private readonly Mock<IAddLunchSpotService> _addLunchSpotServiceMock;
+    private readonly Mock<IFindLunchSpotService> _findLunchSpotServiceMock;
     private readonly Controller _subjectUnderTest;
     
     public ControllerTests()
     {
-        _lunchSpotServiceMock = new Mock<IAddLunchSpotService>();
-        _searchLunchSpotServiceMock = new Mock<IFindLunchSpotService>();
-        _subjectUnderTest = new Controller(_lunchSpotServiceMock.Object, _searchLunchSpotServiceMock.Object);
+        _addLunchSpotServiceMock = new Mock<IAddLunchSpotService>();
+        _findLunchSpotServiceMock = new Mock<IFindLunchSpotService>();
+        _subjectUnderTest = new Controller(_addLunchSpotServiceMock.Object, _findLunchSpotServiceMock.Object);
     }
 
     [Fact]
-    public void AddLunchSpot_ShouldReturnBadRequest_WhenRequestIsInvalid()
+    public async Task AddLunchSpot_ShouldReturnBadRequest_WhenRequestIsInvalid()
     {
         var lunchSpot = new LunchSpot { Name = "Test Spot" };
         
         _subjectUnderTest.ModelState.AddModelError("Error", "Invalid model state");
 
-        var result = _subjectUnderTest.AddLunchSpot(lunchSpot);
+        var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
 
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
 
     [Fact]
-    public void AddLunchSpot_ShouldReturnResponse_WhenRequestIsSuccessful()
+    public async Task AddLunchSpot_ShouldReturnConflict_WhenRequestLunchSpotNameAlreadyExists()
+    {
+        var lunchSpot = new LunchSpot { Name = "Test Spot" };
+
+        _addLunchSpotServiceMock.Setup(s => s.AddLunchSpot(lunchSpot)).ReturnsAsync(false);
+
+        var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
+
+        result.ShouldBeOfType<ConflictObjectResult>();
+        result.Value.ShouldBe($"A lunch spot with the name '{lunchSpot.Name}' already exists.");
+    }
+
+    [Fact]
+    public async Task AddLunchSpot_ShouldReturnResponse_WhenRequestIsSuccessful()
     {
         var lunchSpot = new LunchSpot
         {
@@ -47,11 +59,11 @@ public class ControllerTests
             SuitableForSahir = true
         };
 
-        _lunchSpotServiceMock.Setup(s => s.AddLunchSpot(lunchSpot));
-
-        var result = _subjectUnderTest.AddLunchSpot(lunchSpot);
+        _addLunchSpotServiceMock.Setup(s => s.AddLunchSpot(lunchSpot)).ReturnsAsync(true);
+        
+        var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
 
         result.ShouldBeOfType<CreatedAtActionResult>();
-        _lunchSpotServiceMock.Verify(s => s.AddLunchSpot(It.IsAny<LunchSpot>()), Times.Once);
+        _addLunchSpotServiceMock.Verify(s => s.AddLunchSpot(It.IsAny<LunchSpot>()), Times.Once);
     }
 }
