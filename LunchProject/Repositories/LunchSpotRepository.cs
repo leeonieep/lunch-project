@@ -12,7 +12,7 @@ public class LunchSpotRepository : ILunchSpotRepository
         WriteIndented = true
     };
 
-    public async Task<List<LunchSpot>> LoadFromFile()
+    public async Task<List<LunchSpot>> Get()
     {
         if (!File.Exists(FilePath))
         {
@@ -23,7 +23,7 @@ public class LunchSpotRepository : ILunchSpotRepository
         return JsonSerializer.Deserialize<List<LunchSpot>>(jsonString) ?? new List<LunchSpot>();
     }
 
-    public async void SaveToFile(List<LunchSpot> spots)
+    public async void Add(List<LunchSpot> spots)
     {
         var jsonString = JsonSerializer.Serialize(spots, JsonOptions);
         await File.WriteAllTextAsync(FilePath, jsonString);

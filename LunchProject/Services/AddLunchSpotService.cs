@@ -7,7 +7,7 @@ public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpo
 {
     public async Task<bool> AddLunchSpot(LunchSpot requestSpot)
     {
-        var existingSpots = await repository.LoadFromFile();
+        var existingSpots = await repository.Get();
 
         if (existingSpots.Any(spot => requestSpot.Name == spot.Name))
         {
@@ -15,7 +15,7 @@ public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpo
         }
 
         existingSpots.Add(requestSpot);
-        repository.SaveToFile(existingSpots);
+        repository.Add(existingSpots);
 
         return true;
     }

@@ -29,12 +29,12 @@ public class AddLunchSpotServiceTests
         
         var existingSpots = new List<LunchSpot>();
         
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(existingSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(existingSpots);
         
         var result = await _subjectUnderTest.AddLunchSpot(request);
         
-        _lunchSpotRepositoryMock.Verify(x => x.LoadFromFile(), Times.Once);
-        _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Once);
+        _lunchSpotRepositoryMock.Verify(x => x.Get(), Times.Once);
+        _lunchSpotRepositoryMock.Verify(x => x.Add(It.IsAny<List<LunchSpot>>()), Times.Once);
         
         result.ShouldBeTrue();
         existingSpots.Count.ShouldBe(1);
@@ -56,11 +56,11 @@ public class AddLunchSpotServiceTests
             new() { Name = "Test Spot" }  
         };
         
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(existingSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(existingSpots);
         
        var result = await _subjectUnderTest.AddLunchSpot(request);
         
-        _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Never);
+        _lunchSpotRepositoryMock.Verify(x => x.Add(It.IsAny<List<LunchSpot>>()), Times.Never);
         
        result.ShouldBeFalse();
     }

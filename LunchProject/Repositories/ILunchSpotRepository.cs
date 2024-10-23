@@ -4,6 +4,6 @@ namespace LunchProject.Repositories;
 
 public interface ILunchSpotRepository
 {
-    public Task<List<LunchSpot>> LoadFromFile();
-    public void SaveToFile(List<LunchSpot> spots);
+    public Task<List<LunchSpot>> Get();
+    public void Add(List<LunchSpot> spots);
 }

@@ -32,7 +32,7 @@ public class FindLunchSpotServiceTests
             new() { Name = "spot three", PriceRange = "$$$" }
         };
 
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(allLunchSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
 
         var result = await _subjectUnderTest.FindLunchSpot(request);
 
@@ -55,7 +55,7 @@ public class FindLunchSpotServiceTests
             new() { Name = "spot three", AveragePortionSize = "large" }
         };
 
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(allLunchSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
 
         var result = await _subjectUnderTest.FindLunchSpot(request);
 
@@ -78,7 +78,7 @@ public class FindLunchSpotServiceTests
             new() { Name = "spot three", MinutesWalkAway = 15 }
         };
 
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(allLunchSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
 
         var result = await _subjectUnderTest.FindLunchSpot(request);
 
@@ -102,7 +102,7 @@ public class FindLunchSpotServiceTests
             new() { Name = "spot three", SuitableForJanet = false }
         };
 
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(allLunchSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
 
         var result = await _subjectUnderTest.FindLunchSpot(request);
 
@@ -125,7 +125,7 @@ public class FindLunchSpotServiceTests
             new() { Name = "spot three", MinutesWalkAway = 20 }
         };
 
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(allLunchSpots);
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
 
         var result = await _subjectUnderTest.FindLunchSpot(request);
 

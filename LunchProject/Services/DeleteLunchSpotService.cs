@@ -6,7 +6,7 @@ public class DeleteLunchSpotService(ILunchSpotRepository repository) : IDeleteLu
 {
    public async Task<bool> DeleteLunchSpot()
    {
-      var existingSpots = await repository.LoadFromFile();
+      var existingSpots = await repository.Get();
       
       // match spot name ? delete : return false
 

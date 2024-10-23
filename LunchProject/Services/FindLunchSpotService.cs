@@ -7,14 +7,12 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
 {
     public async Task<List<LunchSpot>> FindLunchSpot(RequestLunchSpot request)
     {
-        var existingSpots = await repository.LoadFromFile();
+        var existingSpots = await repository.Get();
         
         var matchingSpots = new List<LunchSpot>();
         
         foreach (var spot in existingSpots)
         {
-            var match = true;
-            
             if (!string.IsNullOrEmpty(request.PriceRange))
             {
                 if (spot.PriceRange != request.PriceRange)
@@ -63,10 +61,8 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
                 }
             }
             
-            if (match)
-            {
-                matchingSpots.Add(spot);
-            }
+            matchingSpots.Add(spot);
+            
         }
         
         return matchingSpots;
