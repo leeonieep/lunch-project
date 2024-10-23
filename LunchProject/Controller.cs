@@ -28,7 +28,7 @@ public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpot
     }
 
     [HttpPost("find")]
-    public async Task<ObjectResult>  FindLunchSpots([FromBody] RequestLunchSpot request)
+    public async Task<ObjectResult> FindLunchSpots([FromBody] RequestLunchSpot request)
     {
         var matchingSpots = await findLunchSpotService.FindLunchSpot(request);
 
