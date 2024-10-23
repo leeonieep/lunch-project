@@ -88,7 +88,7 @@ public class FindLunchSpotServiceTests
     }
 
     [Fact]
-    public async Task FindLunchSpot_ShouldReturnMatchingSpotsWhenSuitabilityForIndividualIsProvided()
+    public async Task FindLunchSpot_ShouldReturnMatchingSpotsWhenSuitableForJanetIsProvided()
     {
         var request = new RequestLunchSpot
         {
@@ -100,6 +100,52 @@ public class FindLunchSpotServiceTests
             new() { Name = "spot one", SuitableForJanet = true },
             new() { Name = "spot two", SuitableForJanet = false },
             new() { Name = "spot three", SuitableForJanet = false }
+        };
+
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
+
+        var result = await _subjectUnderTest.FindLunchSpot(request);
+
+        result.Count.ShouldBe(1);
+        result[0].Name.ShouldBe("spot one");
+    }
+    
+    [Fact]
+    public async Task FindLunchSpot_ShouldReturnMatchingSpotsWhenSuitableForLeonieIsProvided()
+    {
+        var request = new RequestLunchSpot
+        {
+            SuitableForLeonie = true
+        };
+
+        var allLunchSpots = new List<LunchSpot>
+        {
+            new() { Name = "spot one", SuitableForLeonie = true },
+            new() { Name = "spot two", SuitableForLeonie = false },
+            new() { Name = "spot three", SuitableForLeonie = false }
+        };
+
+        _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
+
+        var result = await _subjectUnderTest.FindLunchSpot(request);
+
+        result.Count.ShouldBe(1);
+        result[0].Name.ShouldBe("spot one");
+    }
+    
+    [Fact]
+    public async Task FindLunchSpot_ShouldReturnMatchingSpotsWhenSuitableForSahirIsProvided()
+    {
+        var request = new RequestLunchSpot
+        {
+            SuitableForSahir = true
+        };
+
+        var allLunchSpots = new List<LunchSpot>
+        {
+            new() { Name = "spot one", SuitableForSahir = true },
+            new() { Name = "spot two", SuitableForSahir = false },
+            new() { Name = "spot three", SuitableForSahir = false }
         };
 
         _lunchSpotRepositoryMock.Setup(r => r.Get()).ReturnsAsync(allLunchSpots);
