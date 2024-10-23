@@ -5,17 +5,17 @@ namespace LunchProject.Services;
 
 public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpotService
 {
-    public async Task<bool> AddLunchSpot(LunchSpot spot)
+    public async Task<bool> AddLunchSpot(LunchSpot requestSpot)
     {
-        var allLunchSpots = await repository.LoadFromFile();
+        var existingSpots = await repository.LoadFromFile();
 
-        if (allLunchSpots.Any(lunchSpot => spot.Name == lunchSpot.Name))
+        if (existingSpots.Any(spot => requestSpot.Name == spot.Name))
         {
             return false;
-        } //TODO test this new logic
+        }
 
-        allLunchSpots.Add(spot);
-        repository.SaveToFile(allLunchSpots);
+        existingSpots.Add(requestSpot);
+        repository.SaveToFile(existingSpots);
 
         return true;
     }

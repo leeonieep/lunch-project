@@ -22,24 +22,25 @@ public class AddLunchSpotServiceTests
     {
         var request = new LunchSpot
         {
-            Name = "test spot", 
+            Name = "Test Spot", 
             MinutesWalkAway = 5, 
             PriceRange = "$"
         };
         
-        var spots = new List<LunchSpot>();
+        var existingSpots = new List<LunchSpot>();
         
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(spots);
+        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(existingSpots);
         
-        await _subjectUnderTest.AddLunchSpot(request);
+        var result = await _subjectUnderTest.AddLunchSpot(request);
         
         _lunchSpotRepositoryMock.Verify(x => x.LoadFromFile(), Times.Once);
         _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Once);
         
-        spots.Count.ShouldBe(1);
-        spots[0].Name.ShouldBeEquivalentTo(request.Name);
-        spots[0].MinutesWalkAway.ShouldBeEquivalentTo(request.MinutesWalkAway);
-        spots[0].PriceRange.ShouldBeEquivalentTo(request.PriceRange);
+        result.ShouldBeTrue();
+        existingSpots.Count.ShouldBe(1);
+        existingSpots[0].Name.ShouldBeEquivalentTo(request.Name);
+        existingSpots[0].MinutesWalkAway.ShouldBeEquivalentTo(request.MinutesWalkAway);
+        existingSpots[0].PriceRange.ShouldBeEquivalentTo(request.PriceRange);
     }
     
     [Fact]
@@ -47,23 +48,20 @@ public class AddLunchSpotServiceTests
     {
         var request = new LunchSpot
         {
-            Name = "test spot", 
-            MinutesWalkAway = 5, 
-            PriceRange = "$"
+            Name = "Test Spot", 
         };
         
-        var spots = new List<LunchSpot>();
+        var existingSpots = new List<LunchSpot>
+        {
+            new() { Name = "Test Spot" }  
+        };
         
-        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(spots);
+        _lunchSpotRepositoryMock.Setup(r => r.LoadFromFile()).ReturnsAsync(existingSpots);
         
-        await _subjectUnderTest.AddLunchSpot(request);
+       var result = await _subjectUnderTest.AddLunchSpot(request);
         
-        _lunchSpotRepositoryMock.Verify(x => x.LoadFromFile(), Times.Once);
-        _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Once);
+        _lunchSpotRepositoryMock.Verify(x => x.SaveToFile(It.IsAny<List<LunchSpot>>()), Times.Never);
         
-        spots.Count.ShouldBe(1);
-        spots[0].Name.ShouldBeEquivalentTo(request.Name);
-        spots[0].MinutesWalkAway.ShouldBeEquivalentTo(request.MinutesWalkAway);
-        spots[0].PriceRange.ShouldBeEquivalentTo(request.PriceRange);
+       result.ShouldBeFalse();
     }
 }

@@ -7,11 +7,11 @@ public class FindLunchSpotService(ILunchSpotRepository repository) : IFindLunchS
 {
     public async Task<List<LunchSpot>> FindLunchSpot(RequestLunchSpot request)
     {
-        var allLunchSpots = await repository.LoadFromFile();
+        var existingSpots = await repository.LoadFromFile();
         
         var matchingSpots = new List<LunchSpot>();
         
-        foreach (var spot in allLunchSpots)
+        foreach (var spot in existingSpots)
         {
             var match = true;
             

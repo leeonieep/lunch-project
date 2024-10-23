@@ -4,5 +4,5 @@ namespace LunchProject.Services;
 
 public interface IAddLunchSpotService
 {
-    Task<bool> AddLunchSpot(LunchSpot spot);
+    Task<bool> AddLunchSpot(LunchSpot requestSpot);
 }
