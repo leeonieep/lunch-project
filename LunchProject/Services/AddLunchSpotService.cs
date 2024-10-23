@@ -12,7 +12,7 @@ public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpo
         if (allLunchSpots.Any(lunchSpot => spot.Name == lunchSpot.Name))
         {
             return false;
-        }
+        } //TODO test this new logic
 
         allLunchSpots.Add(spot);
         repository.SaveToFile(allLunchSpots);
