@@ -4,7 +4,7 @@
 ## ▶️ Overview
 Lunch Spots API is a simple service built in ASP.NET Core, designed to let users maintain a list of lunch spots and most
 importantly, decide where to eat. This project is intended for Leonie's learning purposes, utilising CRUD operations, 
-JSON-based data storage, and ASP.NET Core API best practices.
+JSON-based data storage, and dotnet API best practices.
 
 ## 🏁 Getting Started
 
