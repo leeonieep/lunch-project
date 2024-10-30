@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace LunchProject;
 
 [ApiController]
-[Route("spots")]
+[Route("spot")]
 public class Controller(
     IAddLunchSpotService addLunchSpotService,
     IFindLunchSpotService findLunchSpotService,
     IDeleteLunchSpotService deleteLunchSpotService) : ControllerBase
 {
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<ObjectResult> AddLunchSpot([FromBody] LunchSpot requestSpot)
     {
         if (!ModelState.IsValid)
