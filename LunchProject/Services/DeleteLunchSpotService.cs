@@ -1,4 +1,3 @@
-using LunchProject.Models;
 using LunchProject.Repositories;
 using LunchProject.Services.Interfaces;
 
