@@ -19,17 +19,20 @@ Run the project and navigate to [Swagger](http://localhost:5000/docs/index.html)
 
 ## 📍 Endpoints
 
-## POST /spot/add
+**POST /spot/add**
+
 **Description:** Adds a new lunch spot to the JSON file, validating name to prevent duplicates.<br>
 **Request Body:** JSON object with lunch spot properties.<br>
 **Response:** Returns `201 Created` if successful.
 
-## POST /spot/find
+**POST /spot/find**
+
 **Description:** Returns a lunch spot that matches provided criteria.<br>
 **Request Body:** JSON object with lunch spot requirements.<br>
 **Response:** Returns the details of lunch spots that match criteria.
 
-## DELETE /spot/delete/{name}
+**DELETE /spot/delete/{name}**
+
 **Description:** Deletes a lunch spot by its name.<br>
 **Parameters:** The name of the lunch spot to delete.<br>
 **Response:** Returns `200 OK` if deleted, or `404 Not Found` if the spot doesn’t exist.
