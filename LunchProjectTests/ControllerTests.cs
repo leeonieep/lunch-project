@@ -1,5 +1,4 @@
 using LunchProject.Models;
-using LunchProject.Services;
 using LunchProject.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -12,13 +11,16 @@ public class ControllerTests
 {
     private readonly Mock<IAddLunchSpotService> _addLunchSpotServiceMock;
     private readonly Mock<IFindLunchSpotService> _findLunchSpotServiceMock;
+    private readonly Mock<IDeleteLunchSpotService> _deleteLunchSpotServiceMock;
     private readonly Controller _subjectUnderTest;
-    
+
     public ControllerTests()
     {
         _addLunchSpotServiceMock = new Mock<IAddLunchSpotService>();
         _findLunchSpotServiceMock = new Mock<IFindLunchSpotService>();
-        _subjectUnderTest = new Controller(_addLunchSpotServiceMock.Object, _findLunchSpotServiceMock.Object);
+        _deleteLunchSpotServiceMock = new Mock<IDeleteLunchSpotService>();
+        _subjectUnderTest = new Controller(_addLunchSpotServiceMock.Object, _findLunchSpotServiceMock.Object,
+            _deleteLunchSpotServiceMock.Object);
     }
 
     [Fact]
@@ -109,4 +111,7 @@ public class ControllerTests
         result.ShouldBeOfType<OkObjectResult>();
         _findLunchSpotServiceMock.Verify(s => s.FindLunchSpot(lunchSpot), Times.Once);
     }
+    
+    
+    //TODO tests for delete endpoint
 }

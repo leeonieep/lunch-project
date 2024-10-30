@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using LunchProject.Models;
-using LunchProject.Services;
 using LunchProject.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +7,10 @@ namespace LunchProject;
 
 [ApiController]
 [Route("spots")]
-public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpotService findLunchSpotService)
-    : ControllerBase
+public class Controller(
+    IAddLunchSpotService addLunchSpotService,
+    IFindLunchSpotService findLunchSpotService,
+    IDeleteLunchSpotService deleteLunchSpotService) : ControllerBase
 {
     [HttpPost]
     public async Task<ObjectResult> AddLunchSpot([FromBody] LunchSpot requestSpot)
@@ -18,9 +19,9 @@ public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpot
         {
             return BadRequest(ModelState);
         }
-        
+
         var success = await addLunchSpotService.AddLunchSpot(requestSpot);
-        
+
         if (!success)
         {
             return Conflict($"A lunch spot with the name '{requestSpot.Name}' already exists.");
@@ -44,14 +45,15 @@ public class Controller(IAddLunchSpotService addLunchSpotService, IFindLunchSpot
 
     [HttpDelete("delete/{name?}")]
     public async Task<ObjectResult> DeleteLunchSpot(
-        [FromRoute] [Required(ErrorMessage = "No Lunch Spot Name Provided")] string name)
+        [FromRoute] [Required(ErrorMessage = "No Lunch Spot Name Provided")]
+        string name)
     {
-        //var success = await deleteLunchSpotService.DeleteLunchSpot(name);
+        var success = await deleteLunchSpotService.DeleteLunchSpot(name);
 
-        // if (!success)
-        // {
-        //     return NotFound($"No lunch spot with the name '{name}' exists.");
-        // }
+        if (!success)
+        {
+            return NotFound($"No lunch spot with the name '{name}' exists.");
+        }
 
         return new ObjectResult("Lunch spot deleted successfully.");
     }

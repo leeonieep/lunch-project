@@ -1,3 +1,4 @@
+using LunchProject.Models;
 using LunchProject.Repositories;
 using LunchProject.Services.Interfaces;
 
@@ -5,11 +6,18 @@ namespace LunchProject.Services;
 
 public class DeleteLunchSpotService(ILunchSpotRepository repository) : IDeleteLunchSpotService
 {
-   public async Task<bool> DeleteLunchSpot()
+   public async Task<bool> DeleteLunchSpot(string requestName)
    {
       var existingSpots = await repository.Get();
-      
-      // match spot name ? delete : return false
+
+      var removedCount = existingSpots.RemoveAll(x => x.Name == requestName);
+
+      if (removedCount == 0)
+      {
+         return false;
+      }
+
+      await repository.Add(existingSpots);
 
       return true;
    }

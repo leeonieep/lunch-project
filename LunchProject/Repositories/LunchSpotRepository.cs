@@ -23,7 +23,7 @@ public class LunchSpotRepository : ILunchSpotRepository
         return JsonSerializer.Deserialize<List<LunchSpot>>(jsonString) ?? new List<LunchSpot>();
     }
 
-    public async void Add(List<LunchSpot> spots)
+    public async Task Add(List<LunchSpot> spots)
     {
         var jsonString = JsonSerializer.Serialize(spots, JsonOptions);
         await File.WriteAllTextAsync(FilePath, jsonString);
