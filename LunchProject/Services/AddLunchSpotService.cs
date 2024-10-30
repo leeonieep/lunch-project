@@ -16,7 +16,7 @@ public class AddLunchSpotService(ILunchSpotRepository repository) : IAddLunchSpo
         }
 
         existingSpots.Add(requestSpot);
-        repository.Add(existingSpots);
+        await repository.Add(existingSpots);
 
         return true;
     }
