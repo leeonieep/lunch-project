@@ -67,11 +67,26 @@ public class ControllerTests
         var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
 
         result.ShouldBeOfType<CreatedAtActionResult>();
+        result.Value.ShouldBeEquivalentTo(lunchSpot);
         _addLunchSpotServiceMock.Verify(s => s.AddLunchSpot(lunchSpot), Times.Once);
+    }
+    
+    [Fact]
+    public async Task AddLunchSpot_ShouldReturnException_WhenServiceThrowsException()
+    {
+        var lunchSpot = new LunchSpot { Name = "Test Spot" };
+        
+        _addLunchSpotServiceMock.Setup(s => s.AddLunchSpot(lunchSpot)).ThrowsAsync(new Exception());
+
+        var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
+
+        result.ShouldBeOfType<ObjectResult>();
+        result.Value.ShouldBe("An unexpected error occurred.");
+
     }
 
     [Fact]
-    public async Task FindLunchSpot_ShouldNotFound_WhenNoMatchingLunchSpotsAreFound()
+    public async Task FindLunchSpots_ShouldNotFound_WhenNoMatchingLunchSpotsAreFound()
     {
         var lunchSpot = new RequestLunchSpot
         {
@@ -92,7 +107,7 @@ public class ControllerTests
     }
 
     [Fact]
-    public async Task FindLunchSpot_ShouldReturnResponse_WhenRequestIsSuccessful()
+    public async Task FindLunchSpots_ShouldReturnResponse_WhenRequestIsSuccessful()
     {
         var lunchSpot = new RequestLunchSpot
         {
@@ -111,6 +126,19 @@ public class ControllerTests
 
         result.ShouldBeOfType<OkObjectResult>();
         _findLunchSpotServiceMock.Verify(s => s.FindLunchSpot(lunchSpot), Times.Once);
+    }
+    
+    [Fact]
+    public async Task FindLunchSpots_ShouldReturnException_WhenServiceThrowsException()
+    {
+        var lunchSpot = new RequestLunchSpot { AveragePortionSize = "large" };
+        
+        _findLunchSpotServiceMock.Setup(s => s.FindLunchSpot(lunchSpot)).ThrowsAsync(new Exception());
+
+        var result = await _subjectUnderTest.FindLunchSpots(lunchSpot);
+
+        result.ShouldBeOfType<ObjectResult>();
+        result.Value.ShouldBe("An unexpected error occurred.");
     }
 
     [Theory]
@@ -151,7 +179,17 @@ public class ControllerTests
         result.Value.ShouldBe("Lunch spot deleted successfully.");
     }
     
+    [Fact]
+    public async Task DeleteLunchSpot_ShouldReturnException_WhenServiceThrowsException()
+    {
+        const string name = "Test Spot";
 
+        _deleteLunchSpotServiceMock.Setup(s => s.DeleteLunchSpot(name)).ThrowsAsync(new Exception());
 
-    //TODO can repository throw an exception? try catch and test and handle 
+        var result = await _subjectUnderTest.DeleteLunchSpot(name);
+
+        result.ShouldBeOfType<ObjectResult>();
+        result.Value.ShouldBe("An unexpected error occurred.");
+    }
+    // add normal lunch spot at the top?
 }

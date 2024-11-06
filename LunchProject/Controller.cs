@@ -20,27 +20,41 @@ public class Controller(
             return BadRequest(ModelState);
         }
 
-        var success = await addLunchSpotService.AddLunchSpot(requestSpot);
-
-        if (!success)
+        try
         {
-            return Conflict($"A lunch spot with the name '{requestSpot.Name}' already exists.");
-        }
+            var success = await addLunchSpotService.AddLunchSpot(requestSpot);
 
-        return CreatedAtAction(nameof(AddLunchSpot), new { name = requestSpot.Name }, requestSpot);
+            if (!success)
+            {
+                return Conflict($"A lunch spot with the name '{requestSpot.Name}' already exists.");
+            }
+
+            return CreatedAtAction(nameof(AddLunchSpot), new { name = requestSpot.Name }, requestSpot);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+        }
     }
 
     [HttpPost("find")]
     public async Task<ObjectResult> FindLunchSpots([FromBody] RequestLunchSpot request)
     {
-        var matchingSpots = await findLunchSpotService.FindLunchSpot(request);
-
-        if (matchingSpots.Count <= 0)
+        try
         {
-            return NotFound("No lunch spots match the provided criteria.");
-        }
+            var matchingSpots = await findLunchSpotService.FindLunchSpot(request);
 
-        return Ok(matchingSpots);
+            if (matchingSpots.Count <= 0)
+            {
+                return NotFound("No lunch spots match the provided criteria.");
+            }
+
+            return Ok(matchingSpots);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+        }
     }
 
     [HttpDelete("delete/{name?}")]
@@ -48,15 +62,20 @@ public class Controller(
         [FromRoute] [Required(ErrorMessage = "No Lunch Spot Name Provided")]
         string name)
     {
-        var success = await deleteLunchSpotService.DeleteLunchSpot(name);
-
-        if (!success)
+        try
         {
-            return NotFound($"No lunch spot with the name '{name}' exists.");
-        }
+            var success = await deleteLunchSpotService.DeleteLunchSpot(name);
 
-        return new OkObjectResult("Lunch spot deleted successfully.");
+            if (!success)
+            {
+                return NotFound($"No lunch spot with the name '{name}' exists.");
+            }
+
+            return new OkObjectResult("Lunch spot deleted successfully.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+        }
     }
 }
-
-// TODO try catch around whole controller method
