@@ -3,54 +3,63 @@
     "Name": "Boots",
     "PriceRange": "$",
     "AveragePortionSize": "small",
+    "MinutesWalkAway": 4,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "Pieminister",
+    "PriceRange": "$$",
+    "AveragePortionSize": "medium",
     "MinutesWalkAway": 5,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "Itsu",
+    "PriceRange": "$$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 8,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": false
+  },
+  {
+    "Name": "Fat Pat's",
+    "PriceRange": "$$$",
+    "AveragePortionSize": "large",
+    "MinutesWalkAway": 8,
     "SuitableForLeonie": false,
     "SuitableForSahir": true,
-    "SuitableForJanet": true
+    "SuitableForJanet": false
   },
   {
-    "Name": "hello",
+    "Name": "Street Guys",
     "PriceRange": "$",
     "AveragePortionSize": "medium",
-    "MinutesWalkAway": 6,
-    "SuitableForLeonie": true,
+    "MinutesWalkAway": 4,
+    "SuitableForLeonie": false,
     "SuitableForSahir": true,
-    "SuitableForJanet": true
+    "SuitableForJanet": false
   },
   {
-    "Name": "hi",
-    "PriceRange": "$",
+    "Name": "Dishoom",
+    "PriceRange": "$$$",
     "AveragePortionSize": "large",
-    "MinutesWalkAway": 56,
+    "MinutesWalkAway": 3,
     "SuitableForLeonie": true,
     "SuitableForSahir": true,
     "SuitableForJanet": true
   },
   {
-    "Name": "string",
-    "PriceRange": "$",
-    "AveragePortionSize": "medium",
-    "MinutesWalkAway": 30,
-    "SuitableForLeonie": true,
-    "SuitableForSahir": true,
-    "SuitableForJanet": true
-  },
-  {
-    "Name": "new spot",
-    "PriceRange": "$$$",
-    "AveragePortionSize": "medium",
-    "MinutesWalkAway": 30,
-    "SuitableForLeonie": true,
-    "SuitableForSahir": true,
-    "SuitableForJanet": true
-  },
-  {
-    "Name": "woooo",
-    "PriceRange": "$$$",
-    "AveragePortionSize": "medium",
-    "MinutesWalkAway": 30,
-    "SuitableForLeonie": true,
-    "SuitableForSahir": true,
+    "Name": "Katsouris Deli",
+    "PriceRange": "$$",
+    "AveragePortionSize": "large",
+    "MinutesWalkAway": 1,
+    "SuitableForLeonie": false,
+    "SuitableForSahir": false,
     "SuitableForJanet": true
   }
 ]
