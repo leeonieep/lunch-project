@@ -191,5 +191,4 @@ public class ControllerTests
         result.ShouldBeOfType<ObjectResult>();
         result.Value.ShouldBe("An unexpected error occurred.");
     }
-    // add normal lunch spot at the top?
 }
