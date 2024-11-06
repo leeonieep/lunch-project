@@ -55,6 +55,8 @@ public class Controller(
             return NotFound($"No lunch spot with the name '{name}' exists.");
         }
 
-        return new ObjectResult("Lunch spot deleted successfully.");
+        return new OkObjectResult("Lunch spot deleted successfully.");
     }
 }
+
+// TODO try catch around whole controller method

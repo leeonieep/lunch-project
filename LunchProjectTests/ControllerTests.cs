@@ -27,7 +27,7 @@ public class ControllerTests
     public async Task AddLunchSpot_ShouldReturnBadRequest_WhenRequestIsInvalid()
     {
         var lunchSpot = new LunchSpot { Name = "Test Spot" };
-        
+
         _subjectUnderTest.ModelState.AddModelError("Error", "Invalid model state");
 
         var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
@@ -63,13 +63,13 @@ public class ControllerTests
         };
 
         _addLunchSpotServiceMock.Setup(s => s.AddLunchSpot(lunchSpot)).ReturnsAsync(true);
-        
+
         var result = await _subjectUnderTest.AddLunchSpot(lunchSpot);
 
         result.ShouldBeOfType<CreatedAtActionResult>();
         _addLunchSpotServiceMock.Verify(s => s.AddLunchSpot(lunchSpot), Times.Once);
     }
-    
+
     [Fact]
     public async Task FindLunchSpot_ShouldNotFound_WhenNoMatchingLunchSpotsAreFound()
     {
@@ -104,16 +104,54 @@ public class ControllerTests
             SuitableForSahir = true
         };
 
-        _findLunchSpotServiceMock.Setup(s => s.FindLunchSpot(lunchSpot)).ReturnsAsync([new LunchSpot { Name = "Test Spot" }]);
+        _findLunchSpotServiceMock.Setup(s => s.FindLunchSpot(lunchSpot))
+            .ReturnsAsync([new LunchSpot { Name = "Test Spot" }]);
 
         var result = await _subjectUnderTest.FindLunchSpots(lunchSpot);
 
         result.ShouldBeOfType<OkObjectResult>();
         _findLunchSpotServiceMock.Verify(s => s.FindLunchSpot(lunchSpot), Times.Once);
     }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData(null)]
+    [InlineData(" ")]
+    public async Task DeleteLunchSpot_ShouldReturnNotFound_WhenNoLunchSpotNameIsProvided(string name)
+    {
+        var result = await _subjectUnderTest.DeleteLunchSpot(name);
+
+        result.ShouldBeOfType<NotFoundObjectResult>();
+        result.Value.ShouldBe($"No lunch spot with the name '{name}' exists.");
+    }
+
+    [Fact]
+    public async Task DeleteLunchSpot_ShouldReturnNotFound_WhenNoMatchingLunchSpotsAreFound()
+    {
+        const string name = "Test Spot";
+
+        _deleteLunchSpotServiceMock.Setup(s => s.DeleteLunchSpot(name)).ReturnsAsync(false);
+
+        var result = await _subjectUnderTest.DeleteLunchSpot(name);
+
+        result.ShouldBeOfType<NotFoundObjectResult>();
+        result.Value.ShouldBe($"No lunch spot with the name '{name}' exists.");
+    }
+
+    [Fact]
+    public async Task DeleteLunchSpot_ShouldReturnResponse_WhenRequestIsSuccessful()
+    {
+        const string name = "Test Spot";
+
+        _deleteLunchSpotServiceMock.Setup(s => s.DeleteLunchSpot(name)).ReturnsAsync(true);
+
+        var result = await _subjectUnderTest.DeleteLunchSpot(name);
+
+        result.ShouldBeOfType<OkObjectResult>();
+        result.Value.ShouldBe("Lunch spot deleted successfully.");
+    }
     
-    
-    //TODO tests for delete endpoint
-    
+
+
     //TODO can repository throw an exception? try catch and test and handle 
 }
