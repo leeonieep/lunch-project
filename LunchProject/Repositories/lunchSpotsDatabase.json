@@ -61,5 +61,32 @@
     "SuitableForLeonie": false,
     "SuitableForSahir": false,
     "SuitableForJanet": true
+  },
+  {
+    "Name": "M&S",
+    "PriceRange": "$$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 7,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": true
+  },
+  {
+    "Name": "Archie's",
+    "PriceRange": "$$",
+    "AveragePortionSize": "medium",
+    "MinutesWalkAway": 9,
+    "SuitableForLeonie": false,
+    "SuitableForSahir": true,
+    "SuitableForJanet": false
+  },
+  {
+    "Name": "Salt and Pepper",
+    "PriceRange": "$$",
+    "AveragePortionSize": "large",
+    "MinutesWalkAway": 13,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": false
   }
 ]
