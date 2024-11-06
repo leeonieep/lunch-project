@@ -11,6 +11,8 @@ builder.Services.AddSwaggerGen(c =>
 
     c.SwaggerDoc("v1",
         new OpenApiInfo { Title = title, Version = "v1" });
+    
+    c.EnableAnnotations();
 });
     
 builder.Services.AddControllers();

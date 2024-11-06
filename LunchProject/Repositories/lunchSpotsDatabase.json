@@ -74,7 +74,7 @@
   {
     "Name": "Archie's",
     "PriceRange": "$$",
-    "AveragePortionSize": "medium",
+    "AveragePortionSize": "large",
     "MinutesWalkAway": 9,
     "SuitableForLeonie": false,
     "SuitableForSahir": true,
@@ -82,9 +82,18 @@
   },
   {
     "Name": "Salt and Pepper",
-    "PriceRange": "$$",
+    "PriceRange": "$$$",
     "AveragePortionSize": "large",
     "MinutesWalkAway": 13,
+    "SuitableForLeonie": true,
+    "SuitableForSahir": true,
+    "SuitableForJanet": false
+  },
+  {
+    "Name": "Honest Burger",
+    "PriceRange": "$$$",
+    "AveragePortionSize": "large",
+    "MinutesWalkAway": 3,
     "SuitableForLeonie": true,
     "SuitableForSahir": true,
     "SuitableForJanet": false

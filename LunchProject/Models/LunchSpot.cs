@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LunchProject.Models;
 
@@ -7,9 +7,10 @@ public class LunchSpot
 {
     [Required]
     public required string Name { get; set; }
-
+    
     [Required]
     [RegularExpression(@"^\${1,3}$", ErrorMessage = "Price range must be $, $$, or $$$")]
+    [SwaggerSchema("Generally, $ is below £5, $$ is below £10 and $$$ is above £10")]
     public string? PriceRange { get; set; }
 
     [Required]
