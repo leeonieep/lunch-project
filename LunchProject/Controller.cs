@@ -81,11 +81,11 @@ public class Controller(
     }
 
     [HttpGet]
-    public async Task<ObjectResult> GetAllLunchSpots()
+    public async Task<ObjectResult> GetAllLunchSpots(int page = 1, int pageSize = 10)
     {
         try
         {
-            var spots = await getAllLunchSpotsService.GetAllLunchSpots();
+            var spots = await getAllLunchSpotsService.GetAllLunchSpots(page, pageSize);
 
             return Ok(spots);
         }

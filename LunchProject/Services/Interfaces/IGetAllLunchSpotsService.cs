@@ -4,5 +4,5 @@ namespace LunchProject.Services.Interfaces;
 
 public interface IGetAllLunchSpotsService
 {
-    Task<List<LunchSpot>> GetAllLunchSpots();
+    Task<PaginatedResponse<LunchSpot>> GetAllLunchSpots(int page, int pageSize);
 }
