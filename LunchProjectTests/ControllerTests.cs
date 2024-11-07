@@ -12,6 +12,7 @@ public class ControllerTests
     private readonly Mock<IAddLunchSpotService> _addLunchSpotServiceMock;
     private readonly Mock<IFindLunchSpotService> _findLunchSpotServiceMock;
     private readonly Mock<IDeleteLunchSpotService> _deleteLunchSpotServiceMock;
+    private readonly Mock<IGetAllLunchSpotsService> _getAllLunchSpotsServiceMock;
     private readonly Controller _subjectUnderTest;
 
     public ControllerTests()
@@ -19,8 +20,9 @@ public class ControllerTests
         _addLunchSpotServiceMock = new Mock<IAddLunchSpotService>();
         _findLunchSpotServiceMock = new Mock<IFindLunchSpotService>();
         _deleteLunchSpotServiceMock = new Mock<IDeleteLunchSpotService>();
+        _getAllLunchSpotsServiceMock = new Mock<IGetAllLunchSpotsService>();
         _subjectUnderTest = new Controller(_addLunchSpotServiceMock.Object, _findLunchSpotServiceMock.Object,
-            _deleteLunchSpotServiceMock.Object);
+            _deleteLunchSpotServiceMock.Object, _getAllLunchSpotsServiceMock.Object);
     }
 
     [Fact]

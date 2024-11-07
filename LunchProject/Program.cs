@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAddLunchSpotService, AddLunchSpotService>();
 builder.Services.AddScoped<IFindLunchSpotService, FindLunchSpotService>();
 builder.Services.AddScoped<IDeleteLunchSpotService, DeleteLunchSpotService>();
+builder.Services.AddScoped<IGetAllLunchSpotsService, GetAllLunchSpotsService>();
 builder.Services.AddScoped<ILunchSpotRepository, LunchSpotRepository>();
 
 var app = builder.Build();

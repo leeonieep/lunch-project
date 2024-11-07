@@ -10,7 +10,8 @@ namespace LunchProject;
 public class Controller(
     IAddLunchSpotService addLunchSpotService,
     IFindLunchSpotService findLunchSpotService,
-    IDeleteLunchSpotService deleteLunchSpotService) : ControllerBase
+    IDeleteLunchSpotService deleteLunchSpotService,
+    IGetAllLunchSpotsService getAllLunchSpotsService) : ControllerBase
 {
     [HttpPost("add")]
     public async Task<ObjectResult> AddLunchSpot([FromBody] LunchSpot requestSpot)
@@ -72,6 +73,21 @@ public class Controller(
             }
 
             return new OkObjectResult("Lunch spot deleted successfully.");
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+        }
+    }
+
+    [HttpGet]
+    public async Task<ObjectResult> GetAllLunchSpots()
+    {
+        try
+        {
+            var spots = await getAllLunchSpotsService.GetAllLunchSpots();
+
+            return Ok(spots);
         }
         catch (Exception)
         {
