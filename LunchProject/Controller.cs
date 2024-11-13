@@ -2,17 +2,19 @@ using System.ComponentModel.DataAnnotations;
 using LunchProject.Models;
 using LunchProject.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LunchProject;
 
 [ApiController]
-[Route("spot")]
+[Route("lunchSpot")]
 public class Controller(
     IAddLunchSpotService addLunchSpotService,
     IFindLunchSpotService findLunchSpotService,
     IDeleteLunchSpotService deleteLunchSpotService,
     IGetAllLunchSpotsService getAllLunchSpotsService) : ControllerBase
 {
+    [SwaggerOperation(Summary = "Adds a new lunch spot")]
     [HttpPost("add")]
     public async Task<ObjectResult> AddLunchSpot([FromBody] LunchSpot requestSpot)
     {
@@ -37,7 +39,8 @@ public class Controller(
             return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
         }
     }
-
+    
+    [SwaggerOperation(Summary = "Finds lunch spots that match the provided criteria")]
     [HttpPost("find")]
     public async Task<ObjectResult> FindLunchSpots([FromBody] RequestLunchSpot request)
     {
@@ -57,7 +60,8 @@ public class Controller(
             return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
         }
     }
-
+    
+    [SwaggerOperation(Summary = "Deletes a lunch spot")]
     [HttpDelete("delete/{name?}")]
     public async Task<ObjectResult> DeleteLunchSpot(
         [FromRoute] [Required(ErrorMessage = "No Lunch Spot Name Provided")]
@@ -79,7 +83,8 @@ public class Controller(
             return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
         }
     }
-
+    
+    [SwaggerOperation(Summary = "Retrieves all lunch spots")]
     [HttpGet]
     public async Task<ObjectResult> GetAllLunchSpots(int page = 1, int pageSize = 10)
     {
