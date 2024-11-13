@@ -6,25 +6,31 @@ namespace LunchProject.Services;
 
 public class GetAllLunchSpotsService(ILunchSpotRepository repository) : IGetAllLunchSpotsService
 {
-    public async Task<PaginatedResponse<LunchSpot>> GetAllLunchSpots(int page, int pageSize)
+    public async Task<PaginatedResponse> GetAllLunchSpots(int page, int pageSize)
     {
-        var spots = await repository.Get();
-        var numberOfSpots = spots.Count;
+        var existingSpots = await repository.Get();
         
-        var paginatedSpots = spots
+        var numberOfSpots = existingSpots.Count;
+        
+        var totalPages = (int)Math.Ceiling(numberOfSpots / (double)pageSize);
+
+        if (page > totalPages)
+        {
+            page = totalPages;
+        }
+        
+        var paginatedSpots = existingSpots
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToList();
-
-        return new PaginatedResponse<LunchSpot>(paginatedSpots, numberOfSpots, page, pageSize);
+        
+        return new PaginatedResponse
+        {
+            Data = paginatedSpots,
+            CurrentPage = page,
+            TotalPages = totalPages,
+            PageSize = pageSize,
+            TotalItems = numberOfSpots
+        };
     }
-}
-
-public class PaginatedResponse<T>(List<T> items, int count, int page, int pageSize)
-{
-    public int CurrentPage { get; set; } = page;
-    public int TotalPages { get; set; } = (int)Math.Ceiling(count / (double)pageSize);
-    public int PageSize { get; set; } = pageSize;
-    public int TotalItems { get; set; } = count;
-    public List<T> Items { get; set; } = items;
 }
